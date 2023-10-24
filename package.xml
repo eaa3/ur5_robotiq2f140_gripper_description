@@ -4,7 +4,7 @@
   <name>ur5_robotiq2f140_gripper_description</name>
   <version>0.0.1</version>
   <description>UR5 description with Robotiq 2f 140mm gripper</description>
-  <maintainer email="ermano.arruda@">Ermano Arruda</maintainer>
+  <maintainer email="todo@mail.to">Ermano Arruda</maintainer>
   <license>BSD</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
