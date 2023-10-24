@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot name="ur5" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:arg name="name" default="ur"/>
+  <xacro:arg name="ur_type" default="ur5e"/>
+
+  <xacro:include filename="$(find ur_description)/urdf/ur.urdf.xacro" />
+  <xacro:include filename="$(find robotiq_140_description)/urdf/robotiq_arg2f_140_model_macro.xacro" />
+  <xacro:include filename="$(find robotiq_140_description)/urdf/robotiq_arg2f_coupling.xacro" />
+  
+  <!-- Attach the robotiq 140 gripper -->
+  <xacro:robotiq_arg2f_coupling xyz="0 0 0.0" rpy="0 0 ${pi/2}" connected_to="tool0" prefix=""/>
+  <xacro:robotiq_arg2f_140 xyz="0 0 0.0" rpy="0 0 0" connected_to="robotiq_arg2f_coupling" prefix=""/>
+
+  <!-- Add end-effector marker -->
+    <xacro:property name="eps" value="1.0E-20" />
+    <link name="lfr_ee_payload">
+        <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="${eps}" />
+            <inertia ixx="${eps}" iyy="${eps}" izz="${eps}" ixy="${eps}" ixz="${eps}" iyz="${eps}" />
+        </inertial>
+    </link>
+    <joint name="jfr_ee_payload" type="fixed">
+      <origin rpy="0 0 ${pi}" xyz="0 0 0.215"/>
+      <parent link="robotiq_arg2f_base_link"/>
+      <child link="lfr_ee_payload"/>
+      <axis xyz="0 0 0"/>
+    </joint>
+  
+  
+</robot>
